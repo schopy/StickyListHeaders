@@ -1,6 +1,4 @@
-package se.emilsjolander.stickylistheaders;
-
-import java.util.ArrayList;
+package se.emilsjolander.demo;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
  * @author Emil Sjölander

@@ -1,4 +1,4 @@
-package se.emilsjolander.stickylistheaders;
+package se.emilsjolander.demo;
 
 import android.annotation.TargetApi;
 import android.content.res.Configuration;
@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
+
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
  * @author Emil Sjölander
@@ -49,10 +51,11 @@ public class TestActivity extends ActionBarActivity implements
         stickyList.setOnStickyHeaderChangedListener(this);
         stickyList.setOnStickyHeaderOffsetChangedListener(this);
         stickyList.addHeaderView(getLayoutInflater().inflate(R.layout.list_header, null));
-        stickyList.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
+//        stickyList.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         stickyList.setEmptyView(findViewById(R.id.empty));
         stickyList.setDrawingListUnderStickyHeader(true);
         stickyList.setAreHeadersSticky(true);
+        stickyList.setShowHeaderOnLeft(true);
         stickyList.setAdapter(mAdapter);
         stickyList.setOnTouchListener(this);
 

@@ -1,8 +1,18 @@
 apply plugin: 'android-library'
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.9.+'
+    }
+}
+
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.0'
+    buildToolsVersion '19.0.3'
 
     sourceSets {
         main {
@@ -13,4 +23,61 @@ android {
     }
 }
 
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/eaa6b5404b7594e6c23b884fdc5795f545db55dd/gradle-mvn-push.gradle'
+apply plugin: 'android-library'
+apply plugin: 'maven'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url releasesRepoUrl
+        credentials {
+            username releasesRepoUsername
+            password releasesRepoPassword
+        }
+    }
+    maven {
+        url snapshotsRepoUrl
+        credentials {
+            username snapshotsRepoUsername
+            password snapshotsRepoPassword
+        }
+    }
+    maven {
+        url thirdPartyRepoUrl
+        credentials {
+            username thirdPartyRepoUsername
+            password thirdPartyRepoPassword
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:support-v4:19.+'
+}
+
+uploadArchives {
+    repositories {
+
+        mavenDeployer {
+
+            pom.groupId = 'se.emilsjolander'
+            pom.artifactId = 'stickylistheaders'
+            pom.version = '2.2.0-SNAPSHOT'
+
+            repository(url: releasesRepoUrl) {
+                authentication(userName: releasesRepoUsername, password: releasesRepoPassword)
+            }
+
+            snapshotRepository(url: snapshotsRepoUrl) {
+                authentication(userName: snapshotsRepoUsername, password: snapshotsRepoPassword)
+            }
+
+            pom.project {
+                name 'ViewPagerIndicator'
+                packaging 'aar'
+            }
+        }
+    }
+}
