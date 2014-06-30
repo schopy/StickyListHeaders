@@ -142,6 +142,8 @@ public class StickyListHeadersListView extends FrameLayout {
 
         // Initialize the wrapped list
         mList = new WrapperViewList(context);
+        mList.setTag(this.getTag());
+
 
         // null out divider, dividers are handled by adapter so they look good with headers
         Log.d("constructor mShowHeaderOnLeft is --> ", "" + mShowHeaderOnLeft);
@@ -590,11 +592,9 @@ public class StickyListHeadersListView extends FrameLayout {
 	/* ---------- StickyListHeaders specific API ---------- */
 
 
-    public void setShowHeaderOnLeft(boolean showHeaderOnLeft) {
+    public void setShowHeaderOnLeft(boolean showHeaderOnLeft, int titleWidth) {
         mShowHeaderOnLeft = showHeaderOnLeft;
         if (showHeaderOnLeft) {
-//            mDivider = null;
-//            mDividerHeight = 0;
             mStickyHeaderWidth = getResources().getDimensionPixelSize(R.dimen.sticky_title_width);
         }
 
@@ -895,6 +895,10 @@ public class StickyListHeadersListView extends FrameLayout {
             offset -= mClippingToPadding ? 0 : mPaddingTop;
             mList.smoothScrollToPositionFromTop(position, offset, duration);
         }
+    }
+
+    public void performItemClick(View view, int position, long id) {
+        mList.performItemClick(view, position, id);
     }
 
     public void setSelection(int position) {
